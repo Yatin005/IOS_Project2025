@@ -14,6 +14,15 @@
 		D88806FC2DFCAE40004747BF /* The_Cake_Artistry25Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88806FB2DFCAE40004747BF /* The_Cake_Artistry25Tests.swift */; };
 		D88807062DFCAE40004747BF /* The_Cake_Artistry25UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807052DFCAE40004747BF /* The_Cake_Artistry25UITests.swift */; };
 		D88807082DFCAE40004747BF /* The_Cake_Artistry25UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807072DFCAE40004747BF /* The_Cake_Artistry25UITestsLaunchTests.swift */; };
+		D88807152DFCAF89004747BF /* Login_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807142DFCAF89004747BF /* Login_Screen.swift */; };
+		D88807172DFCAF99004747BF /* Welcome_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807162DFCAF99004747BF /* Welcome_Screen.swift */; };
+		D88807192DFCAFB6004747BF /* Home_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807182DFCAFB6004747BF /* Home_Screen.swift */; };
+		D888071B2DFCAFD6004747BF /* Gallery_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */; };
+		D888071D2DFCAFE6004747BF /* CakeDetail_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */; };
+		D888071F2DFCAFFB004747BF /* Customization_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888071E2DFCAFFB004747BF /* Customization_Screen.swift */; };
+		D88807212DFCB013004747BF /* Checkout_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807202DFCB013004747BF /* Checkout_Screen.swift */; };
+		D88807232DFCB02B004747BF /* OrderTracking_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807222DFCB02B004747BF /* OrderTracking_Screen.swift */; };
+		D88807252DFCB038004747BF /* Profle_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807242DFCB038004747BF /* Profle_Screen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,15 @@
 		D88807012DFCAE40004747BF /* The_Cake_Artistry25UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = The_Cake_Artistry25UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88807052DFCAE40004747BF /* The_Cake_Artistry25UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Cake_Artistry25UITests.swift; sourceTree = "<group>"; };
 		D88807072DFCAE40004747BF /* The_Cake_Artistry25UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Cake_Artistry25UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D88807142DFCAF89004747BF /* Login_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login_Screen.swift; sourceTree = "<group>"; };
+		D88807162DFCAF99004747BF /* Welcome_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome_Screen.swift; sourceTree = "<group>"; };
+		D88807182DFCAFB6004747BF /* Home_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_Screen.swift; sourceTree = "<group>"; };
+		D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery_Screen.swift; sourceTree = "<group>"; };
+		D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeDetail_Screen.swift; sourceTree = "<group>"; };
+		D888071E2DFCAFFB004747BF /* Customization_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customization_Screen.swift; sourceTree = "<group>"; };
+		D88807202DFCB013004747BF /* Checkout_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkout_Screen.swift; sourceTree = "<group>"; };
+		D88807222DFCB02B004747BF /* OrderTracking_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTracking_Screen.swift; sourceTree = "<group>"; };
+		D88807242DFCB038004747BF /* Profle_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profle_Screen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +116,15 @@
 				D88806EC2DFCAE3E004747BF /* ContentView.swift */,
 				D88806EE2DFCAE3F004747BF /* Assets.xcassets */,
 				D88806F02DFCAE3F004747BF /* Preview Content */,
+				D88807142DFCAF89004747BF /* Login_Screen.swift */,
+				D88807162DFCAF99004747BF /* Welcome_Screen.swift */,
+				D88807182DFCAFB6004747BF /* Home_Screen.swift */,
+				D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */,
+				D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */,
+				D888071E2DFCAFFB004747BF /* Customization_Screen.swift */,
+				D88807202DFCB013004747BF /* Checkout_Screen.swift */,
+				D88807222DFCB02B004747BF /* OrderTracking_Screen.swift */,
+				D88807242DFCB038004747BF /* Profle_Screen.swift */,
 			);
 			path = The_Cake_Artistry25;
 			sourceTree = "<group>";
@@ -257,7 +284,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D888071D2DFCAFE6004747BF /* CakeDetail_Screen.swift in Sources */,
+				D88807252DFCB038004747BF /* Profle_Screen.swift in Sources */,
+				D88807232DFCB02B004747BF /* OrderTracking_Screen.swift in Sources */,
+				D888071B2DFCAFD6004747BF /* Gallery_Screen.swift in Sources */,
 				D88806ED2DFCAE3E004747BF /* ContentView.swift in Sources */,
+				D88807152DFCAF89004747BF /* Login_Screen.swift in Sources */,
+				D88807192DFCAFB6004747BF /* Home_Screen.swift in Sources */,
+				D88807212DFCB013004747BF /* Checkout_Screen.swift in Sources */,
+				D888071F2DFCAFFB004747BF /* Customization_Screen.swift in Sources */,
+				D88807172DFCAF99004747BF /* Welcome_Screen.swift in Sources */,
 				D88806EB2DFCAE3E004747BF /* The_Cake_Artistry25App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
