@@ -9,7 +9,11 @@ import SwiftUI
 
 struct Checkout_Screen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 20) {
+            Text(" Checkout Screen")
+            NavigationLink("Go to Order Tracking", destination: OrderTracking_Screen())
+        }
+        .padding()
     }
 }
 

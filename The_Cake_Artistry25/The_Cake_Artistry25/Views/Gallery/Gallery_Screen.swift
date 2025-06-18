@@ -9,10 +9,9 @@ import SwiftUI
 
 struct Gallery_Screen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 20) {
+            Text("🖼️ Gallery Screen")
+            NavigationLink("Go to Cake Detail", destination: CakeDetail_Screen())
+        }
     }
-}
-
-#Preview {
-    Gallery_Screen()
 }

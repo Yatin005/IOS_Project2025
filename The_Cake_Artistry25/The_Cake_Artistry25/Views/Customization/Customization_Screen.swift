@@ -9,7 +9,11 @@ import SwiftUI
 
 struct Customization_Screen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 20) {
+            Text("Customization Screen")
+            NavigationLink("Go to Checkout", destination: Checkout_Screen())
+        }
+        .padding()
     }
 }
 

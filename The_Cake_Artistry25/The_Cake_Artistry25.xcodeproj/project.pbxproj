@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D309C1252E035C2B0087DF7B /* Cake.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1242E035C2B0087DF7B /* Cake.swift */; };
+		D309C1272E035C5A0087DF7B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1262E035C5A0087DF7B /* Order.swift */; };
+		D309C1292E035C650087DF7B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1282E035C650087DF7B /* User.swift */; };
+		D309C12E2E035CB40087DF7B /* Signup_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C12D2E035CB40087DF7B /* Signup_Screen.swift */; };
+		D309C1362E035D4A0087DF7B /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1352E035D4A0087DF7B /* AuthViewModel.swift */; };
+		D309C1382E035D5A0087DF7B /* CakeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1372E035D5A0087DF7B /* CakeViewModel.swift */; };
+		D309C13A2E035D670087DF7B /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1392E035D670087DF7B /* OrderViewModel.swift */; };
 		D88806EB2DFCAE3E004747BF /* The_Cake_Artistry25App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88806EA2DFCAE3E004747BF /* The_Cake_Artistry25App.swift */; };
 		D88806ED2DFCAE3E004747BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88806EC2DFCAE3E004747BF /* ContentView.swift */; };
 		D88806EF2DFCAE3F004747BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D88806EE2DFCAE3F004747BF /* Assets.xcassets */; };
@@ -43,6 +50,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D309C1242E035C2B0087DF7B /* Cake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cake.swift; sourceTree = "<group>"; };
+		D309C1262E035C5A0087DF7B /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		D309C1282E035C650087DF7B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D309C12D2E035CB40087DF7B /* Signup_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup_Screen.swift; sourceTree = "<group>"; };
+		D309C1352E035D4A0087DF7B /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		D309C1372E035D5A0087DF7B /* CakeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeViewModel.swift; sourceTree = "<group>"; };
+		D309C1392E035D670087DF7B /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		D88806E72DFCAE3E004747BF /* The_Cake_Artistry25.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = The_Cake_Artistry25.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88806EA2DFCAE3E004747BF /* The_Cake_Artistry25App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Cake_Artistry25App.swift; sourceTree = "<group>"; };
 		D88806EC2DFCAE3E004747BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,6 +103,99 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D309C1232E035C160087DF7B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D309C1242E035C2B0087DF7B /* Cake.swift */,
+				D309C1262E035C5A0087DF7B /* Order.swift */,
+				D309C1282E035C650087DF7B /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D309C12A2E035C740087DF7B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D309C1332E035D1D0087DF7B /* Profile */,
+				D309C1322E035D050087DF7B /* Checkout */,
+				D309C1312E035CEA0087DF7B /* Customization */,
+				D309C1302E035CD40087DF7B /* Gallery */,
+				D309C12F2E035CC10087DF7B /* Home */,
+				D309C12C2E035C9F0087DF7B /* Auth */,
+				D309C12B2E035C8C0087DF7B /* Welcome */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D309C12B2E035C8C0087DF7B /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				D88807162DFCAF99004747BF /* Welcome_Screen.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		D309C12C2E035C9F0087DF7B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				D88807142DFCAF89004747BF /* Login_Screen.swift */,
+				D309C12D2E035CB40087DF7B /* Signup_Screen.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		D309C12F2E035CC10087DF7B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D88807182DFCAFB6004747BF /* Home_Screen.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D309C1302E035CD40087DF7B /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */,
+				D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		D309C1312E035CEA0087DF7B /* Customization */ = {
+			isa = PBXGroup;
+			children = (
+				D888071E2DFCAFFB004747BF /* Customization_Screen.swift */,
+			);
+			path = Customization;
+			sourceTree = "<group>";
+		};
+		D309C1322E035D050087DF7B /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				D88807202DFCB013004747BF /* Checkout_Screen.swift */,
+				D88807222DFCB02B004747BF /* OrderTracking_Screen.swift */,
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
+		D309C1332E035D1D0087DF7B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D88807242DFCB038004747BF /* Profle_Screen.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D309C1342E035D2E0087DF7B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D309C1352E035D4A0087DF7B /* AuthViewModel.swift */,
+				D309C1372E035D5A0087DF7B /* CakeViewModel.swift */,
+				D309C1392E035D670087DF7B /* OrderViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		D88806DE2DFCAE3D004747BF = {
 			isa = PBXGroup;
 			children = (
@@ -112,19 +219,13 @@
 		D88806E92DFCAE3E004747BF /* The_Cake_Artistry25 */ = {
 			isa = PBXGroup;
 			children = (
+				D309C1342E035D2E0087DF7B /* ViewModels */,
+				D309C12A2E035C740087DF7B /* Views */,
+				D309C1232E035C160087DF7B /* Models */,
 				D88806EA2DFCAE3E004747BF /* The_Cake_Artistry25App.swift */,
 				D88806EC2DFCAE3E004747BF /* ContentView.swift */,
 				D88806EE2DFCAE3F004747BF /* Assets.xcassets */,
 				D88806F02DFCAE3F004747BF /* Preview Content */,
-				D88807142DFCAF89004747BF /* Login_Screen.swift */,
-				D88807162DFCAF99004747BF /* Welcome_Screen.swift */,
-				D88807182DFCAFB6004747BF /* Home_Screen.swift */,
-				D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */,
-				D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */,
-				D888071E2DFCAFFB004747BF /* Customization_Screen.swift */,
-				D88807202DFCB013004747BF /* Checkout_Screen.swift */,
-				D88807222DFCB02B004747BF /* OrderTracking_Screen.swift */,
-				D88807242DFCB038004747BF /* Profle_Screen.swift */,
 			);
 			path = The_Cake_Artistry25;
 			sourceTree = "<group>";
@@ -285,16 +386,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				D888071D2DFCAFE6004747BF /* CakeDetail_Screen.swift in Sources */,
+				D309C1252E035C2B0087DF7B /* Cake.swift in Sources */,
 				D88807252DFCB038004747BF /* Profle_Screen.swift in Sources */,
+				D309C13A2E035D670087DF7B /* OrderViewModel.swift in Sources */,
 				D88807232DFCB02B004747BF /* OrderTracking_Screen.swift in Sources */,
 				D888071B2DFCAFD6004747BF /* Gallery_Screen.swift in Sources */,
 				D88806ED2DFCAE3E004747BF /* ContentView.swift in Sources */,
+				D309C1292E035C650087DF7B /* User.swift in Sources */,
 				D88807152DFCAF89004747BF /* Login_Screen.swift in Sources */,
 				D88807192DFCAFB6004747BF /* Home_Screen.swift in Sources */,
+				D309C12E2E035CB40087DF7B /* Signup_Screen.swift in Sources */,
 				D88807212DFCB013004747BF /* Checkout_Screen.swift in Sources */,
 				D888071F2DFCAFFB004747BF /* Customization_Screen.swift in Sources */,
+				D309C1362E035D4A0087DF7B /* AuthViewModel.swift in Sources */,
+				D309C1272E035C5A0087DF7B /* Order.swift in Sources */,
 				D88807172DFCAF99004747BF /* Welcome_Screen.swift in Sources */,
 				D88806EB2DFCAE3E004747BF /* The_Cake_Artistry25App.swift in Sources */,
+				D309C1382E035D5A0087DF7B /* CakeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,10 +9,15 @@ import SwiftUI
 
 struct CakeDetail_Screen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 20) {
+            Text("Cake Detail Screen")
+            NavigationLink("Go to Customization", destination: Customization_Screen())
+        }
+        .padding()
     }
 }
 
 #Preview {
     CakeDetail_Screen()
 }
+
