@@ -343,6 +343,9 @@
 				Base,
 			);
 			mainGroup = D88806DE2DFCAE3D004747BF;
+			packageReferences = (
+				5CAB043D2E236C6A00F8FB06 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			productRefGroup = D88806E82DFCAE3E004747BF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -726,6 +729,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5CAB043D2E236C6A00F8FB06 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = D88806DF2DFCAE3D004747BF /* Project object */;
 }

@@ -7,19 +7,66 @@
 
 import SwiftUI
 
-struct Home_Screen: View {
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("🏠 Home Screen")
-                .font(.title)
 
-            NavigationLink("Go to Gallery", destination: Gallery_Screen())
-            NavigationLink("Go to Profile", destination: Profle_Screen())
+struct Home_Screen: View {
+    @EnvironmentObject var authVM: AuthViewModel
+    
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 30) {
+                    Text("🏠 Home")
+                        .font(.largeTitle)
+                    
+                    NavigationLink {
+                        Gallery_Screen()
+                    } label: {
+                        HomeCardView(title: "Gallery", icon: "photo.on.rectangle", color: .blue)
+                    }
+                    
+                    NavigationLink {
+                        Profle_Screen()
+                    } label: {
+                        HomeCardView(title: "Profile", icon: "person.circle", color: .green)
+                    }
+                    
+                    if authVM.user != nil {
+                        Button("Sign Out") {
+                            authVM.signOut()
+                        }
+                        .foregroundColor(.red)
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("")
+            .navigationBarHidden(true)
+        }
+    }
+}
+
+struct HomeCardView: View {
+    let title: String
+    let icon: String
+    let color: Color
+    
+    var body: some View {
+        HStack {
+            Image(systemName: icon)
+                .font(.title)
+            Text(title)
+                .font(.title2)
+            Spacer()
+            Image(systemName: "chevron.right")
         }
         .padding()
+        .background(color.opacity(0.1))
+        .cornerRadius(10)
+        .foregroundColor(color)
     }
 }
 
 #Preview {
     Home_Screen()
+        .environmentObject(AuthViewModel())
 }
