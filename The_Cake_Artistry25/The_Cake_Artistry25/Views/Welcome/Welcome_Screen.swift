@@ -13,8 +13,7 @@ struct Welcome_Screen: View {
             Text("🎂 Welcome to Cake Artistry 🎨")
                 .font(.largeTitle)
 
-            NavigationLink("Login", destination: Login_Screen())
-                .buttonStyle(.borderedProminent)
+           
         }
         .padding()
     }
