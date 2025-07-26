@@ -6,28 +6,22 @@
 //
 
 import SwiftUI
+import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = AuthViewModel()
+    @StateObject var authVM = AuthViewModel()
 
     var body: some View {
-        if viewModel.isLoggedIn {
-            VStack(spacing: 20) {
-                Text("Welcome, \(viewModel.email)!")
-                    .font(.title)
-                Button("Logout") {
-                    viewModel.logout()
-                }
-                .padding()
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(10)
+        NavigationView {
+            if authVM.isLoggedIn {
+                HomeScreen()
+            } else {
+                Login_Screen(viewModel: authVM)
             }
-        } else {
-            Login_Screen(viewModel: viewModel)
         }
     }
 }
+
 
 #Preview {
     ContentView()

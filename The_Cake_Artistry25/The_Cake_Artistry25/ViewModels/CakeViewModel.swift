@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct CakeViewModel: Identifiable {
+    let id = UUID()
+    let title: String
+    let imageName: String
+    let description: String
+    let price: Double
+}

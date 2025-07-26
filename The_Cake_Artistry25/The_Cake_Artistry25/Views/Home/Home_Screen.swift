@@ -4,22 +4,19 @@
 //
 //  Created by Yatin Parulkar on 2025-06-13.
 //
-
 import SwiftUI
 
-struct Home_Screen: View {
+struct HomeScreen: View {
+    let categories = ["Birthday", "Anniversary", "Festival", "Wedding", "Baby Shower"]
+
     var body: some View {
-        VStack(spacing: 20) {
-            Text("🏠 Home Screen")
-                .font(.title)
-
-            NavigationLink("Go to Gallery", destination: Gallery_Screen())
-            NavigationLink("Go to Profile", destination: Profle_Screen())
+        NavigationView {
+            List(categories, id: \.self) { category in
+                NavigationLink(destination: CakeListScreen(category: category)) {
+                    Text(category).font(.headline)
+                }
+            }
+            .navigationTitle("Cake Albums")
         }
-        .padding()
     }
-}
-
-#Preview {
-    Home_Screen()
 }

@@ -7,17 +7,19 @@
 
 import SwiftUI
 
-struct CakeDetail_Screen: View {
+struct CakeDetailScreen: View {
+    let cakeName: String
+
     var body: some View {
         VStack(spacing: 20) {
-            Text("Cake Detail Screen")
-            NavigationLink("Go to Customization", destination: Customization_Screen())
+            Image(systemName: "birthday.cake").resizable().scaledToFit().frame(height: 200).padding()
+            Text(cakeName).font(.title).bold()
+            Text("This is a delicious \(cakeName) perfect for your special moments.")
+                .multilineTextAlignment(.center)
+                .padding()
         }
-        .padding()
+        .navigationTitle("Cake Details")
     }
 }
 
-#Preview {
-    CakeDetail_Screen()
-}
 
