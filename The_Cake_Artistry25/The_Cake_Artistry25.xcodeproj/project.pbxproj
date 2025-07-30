@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CA73A832E397D220008170D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA73A822E397D220008170D /* Album.swift */; };
+		5CA73A852E397FDF0008170D /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA73A842E397FDF0008170D /* AlbumViewModel.swift */; };
 		D309C1252E035C2B0087DF7B /* Cake.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1242E035C2B0087DF7B /* Cake.swift */; };
 		D309C1272E035C5A0087DF7B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1262E035C5A0087DF7B /* Order.swift */; };
 		D309C1292E035C650087DF7B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1282E035C650087DF7B /* User.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5CA73A822E397D220008170D /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		5CA73A842E397FDF0008170D /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		D309C1242E035C2B0087DF7B /* Cake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cake.swift; sourceTree = "<group>"; };
 		D309C1262E035C5A0087DF7B /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		D309C1282E035C650087DF7B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -85,6 +89,10 @@
 		D88807242DFCB038004747BF /* Profle_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profle_Screen.swift; sourceTree = "<group>"; };
 		D8A036012E34241A006B3FD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		5CA73A862E39823F0008170D /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D88806E42DFCAE3E004747BF /* Frameworks */ = {
@@ -123,6 +131,7 @@
 				D309C1242E035C2B0087DF7B /* Cake.swift */,
 				D309C1262E035C5A0087DF7B /* Order.swift */,
 				D309C1282E035C650087DF7B /* User.swift */,
+				5CA73A822E397D220008170D /* Album.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +215,7 @@
 				D309C1352E035D4A0087DF7B /* AuthViewModel.swift */,
 				D309C1372E035D5A0087DF7B /* CakeViewModel.swift */,
 				D309C1392E035D670087DF7B /* OrderViewModel.swift */,
+				5CA73A842E397FDF0008170D /* AlbumViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -233,6 +243,7 @@
 		D88806E92DFCAE3E004747BF /* The_Cake_Artistry25 */ = {
 			isa = PBXGroup;
 			children = (
+				5CA73A862E39823F0008170D /* Services */,
 				D8A036012E34241A006B3FD5 /* GoogleService-Info.plist */,
 				D309C1342E035D2E0087DF7B /* ViewModels */,
 				D309C12A2E035C740087DF7B /* Views */,
@@ -284,6 +295,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5CA73A862E39823F0008170D /* Services */,
 			);
 			name = The_Cake_Artistry25;
 			packageProductDependencies = (
@@ -414,11 +428,13 @@
 			files = (
 				D888071D2DFCAFE6004747BF /* CakeDetail_Screen.swift in Sources */,
 				D309C1252E035C2B0087DF7B /* Cake.swift in Sources */,
+				5CA73A832E397D220008170D /* Album.swift in Sources */,
 				D88807252DFCB038004747BF /* Profle_Screen.swift in Sources */,
 				D309C13A2E035D670087DF7B /* OrderViewModel.swift in Sources */,
 				D88807232DFCB02B004747BF /* OrderTracking_Screen.swift in Sources */,
 				D888071B2DFCAFD6004747BF /* Gallery_Screen.swift in Sources */,
 				D88806ED2DFCAE3E004747BF /* ContentView.swift in Sources */,
+				5CA73A852E397FDF0008170D /* AlbumViewModel.swift in Sources */,
 				D309C1292E035C650087DF7B /* User.swift in Sources */,
 				D88807152DFCAF89004747BF /* Login_Screen.swift in Sources */,
 				D88807192DFCAFB6004747BF /* Home_Screen.swift in Sources */,

@@ -1,45 +1,43 @@
 //
-//  Login_Screen.swift
-//  The_Cake_Artistry25
+//  Login_Screen.swift
+//  The_Cake_Artistry25
 //
-//  Created by Yatin Parulkar on 2025-06-13.
+//  Created by Yatin Parulkar on 2025-06-13.
 //
-
 import SwiftUI
 
-struct Login_Screen: View {
-    @ObservedObject var viewModel: AuthViewModel
+struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var showSignup = false
+    @ObservedObject var authVM: AuthViewModel
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Login").font(.largeTitle).bold()
-
-            TextField("Email", text: $email).autocapitalization(.none).padding().background(Color.gray.opacity(0.1)).cornerRadius(8)
-            SecureField("Password", text: $password).padding().background(Color.gray.opacity(0.1)).cornerRadius(8)
-
-            if !viewModel.errorMessage.isEmpty {
-                Text(viewModel.errorMessage).foregroundColor(.red)
+        VStack(spacing: 16) {
+            TextField("Email", text: $email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .textInputAutocapitalization(.never)
+            SecureField("Password", text: $password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            if authVM.isLoading {
+                ProgressView()
+            } else {
+                Button("Login") {
+                    authVM.signIn(email: email, password: password)
+                }
+                .buttonStyle(.borderedProminent)
             }
-
-            Button("Login") {
-                viewModel.login(email: email, password: password)
+            
+            if let error = authVM.authError {
+                Text("Error: \(error.localizedDescription)")
+                    .foregroundColor(.red)
             }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(8)
-
-            Button("Don't have an account? Sign Up") {
-                showSignup.toggle()
-            }
-            .padding()
-
-            NavigationLink("", destination: Signup_Screen(viewModel: viewModel), isActive: $showSignup).hidden()
+            
+            Divider()
+            
+            NavigationLink("Don't have an account? Sign Up", destination: SignUpView(authVM: authVM))
         }
         .padding()
+        .navigationTitle("Login")
     }
 }

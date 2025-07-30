@@ -1,29 +1,37 @@
 //
-//  ContentView.swift
-//  The_Cake_Artistry25
+//  AppContentView.swift
+//  The_Cake_Artistry25
 //
-//  Created by Yatin Parulkar on 2025-06-13.
+//  Created by Yatin Parulkar on 2025-06-13.
 //
-
-import SwiftUI
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var authVM = AuthViewModel()
-
+    @StateObject var authViewModel = AuthViewModel()
+    
     var body: some View {
-        NavigationView {
-            if authVM.isLoggedIn {
-                HomeScreen()
+        Group {
+            if authViewModel.user != nil {
+                TabView {
+                    HomeView()
+                        .tabItem {
+                            Label("Home", systemImage: "house")
+                        }
+                    Profle_Screen()
+                        .tabItem {
+                            Label("Profile", systemImage: "person.circle")
+                        }
+                }
             } else {
-                Login_Screen(viewModel: authVM)
+                NavigationView {
+                    LoginView(authVM: authViewModel)
+                }
             }
         }
+        .environmentObject(authViewModel)
     }
 }
-
 
 #Preview {
     ContentView()
 }
-
