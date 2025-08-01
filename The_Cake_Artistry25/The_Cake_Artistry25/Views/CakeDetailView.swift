@@ -6,8 +6,8 @@
 //
 import SwiftUI
 
-struct CakeDetailScreen: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+struct CakeDetailView: View {
+    @EnvironmentObject var checkoutViewModel: CheckoutViewModel
     var cake: Cake
     
     @State private var quantity: Int = 1
@@ -99,21 +99,22 @@ struct CakeDetailScreen: View {
                 
                 Divider()
                 
-                // "Order Now" button now uses a NavigationLink to go to CheckoutScreen
-                NavigationLink(destination: Checkout_Screen(
-                    cake: cake,
-                    customizationText: customization,
-                    quantity: quantity,
-                    flavor: selectedFlavor,
-                
-                )) {
-                    Text("Order Now")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(15)
+                // "Order Now" button
+                Button("Order Now") {
+                    checkoutViewModel.checkout(
+                        cake: cake,
+                        quantity: quantity,
+                        flavor: selectedFlavor,
+                        orderDate: selectedDate,
+                        orderTime: selectedTime,
+                        customization: customization
+                    )
                 }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(15)
                 
                 Spacer()
             }
@@ -121,5 +122,12 @@ struct CakeDetailScreen: View {
         }
         .navigationTitle(cake.name)
         .navigationBarTitleDisplayMode(.inline)
+        .alert(isPresented: $checkoutViewModel.orderSuccess) {
+            Alert(
+                title: Text("Order Placed!"),
+                message: Text("Your order has been placed successfully."),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }

@@ -1,8 +1,8 @@
 //
-//  OrderTracking_Screen.swift
-//  The_Cake_Artistry25
+//  OrderTrackingScreen.swift
+//  The_Cake_Artistry25
 //
-//  Created by Yatin Parulkar on 2025-06-13.
+//  Created by Yatin Parulkar on 2025-06-13.
 //
 
 import SwiftUI
@@ -15,15 +15,16 @@ struct OrderTrackingScreen: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("Order #\(order.id)")
+            Text("Order #\(order.id ?? "N/A")") // Safely unwrap order.id
                 .font(.largeTitle)
             
             if let cake = cake {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(cake.name).font(.headline)
                     Text("Quantity: \(order.quantity)")
-                    Text("Customization: \(order.customization.isEmpty ? "None" : order.customization)")
-                    Text("Ordered on: \(order.timestamp, formatter: DateFormatter.shortDate)")
+                    Text("Customization: \(order.customization!.isEmpty ? "None" : order.customization)")
+                    // Use orderDate and orderTime instead of timestamp
+                    
                 }
             } else {
                 ProgressView("Loading cake details...")
@@ -52,10 +53,17 @@ struct OrderTrackingScreen: View {
     }
 }
 
+// Add a DateFormatter for time
 extension DateFormatter {
     static var shortDate: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
+        return formatter
+    }
+
+    static var shortTime: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
         return formatter
     }
 }

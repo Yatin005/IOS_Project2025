@@ -1,13 +1,9 @@
-//
-//  Album.swift
-//  The_Cake_Artistry25
-//
-//  Created by Deep Kaleka on 2025-07-29.
-//
+// Album.swift
 import Foundation
+import FirebaseFirestore
 
 struct Album: Identifiable, Codable {
-    var id: String
+    @DocumentID var id: String?
     var title: String
     var imageUrl: String
 }

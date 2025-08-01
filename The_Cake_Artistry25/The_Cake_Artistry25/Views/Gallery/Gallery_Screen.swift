@@ -34,7 +34,7 @@ struct GalleryScreen: View {
                 }
             }
         }
-        .onAppear { cakeVM.fetchCakes(for: album.id) }
+        .onAppear { cakeVM.fetchCakes(for: album.id!) }
         .navigationTitle(album.title)
     }
 }

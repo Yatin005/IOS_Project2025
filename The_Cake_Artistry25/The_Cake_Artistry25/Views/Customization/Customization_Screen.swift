@@ -37,7 +37,7 @@ struct CustomizationScreen: View {
             Stepper("Quantity: \(quantity)", value: $quantity, in: 1...20)
                 .padding(.horizontal)
             
-            NavigationLink(destination: CheckoutScreen(
+            NavigationLink(destination: Checkout_Screen(
                 cake: cake,
                 customizationText: customizationText,
                 quantity: quantity

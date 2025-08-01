@@ -1,31 +1,29 @@
+// The_Cake_Artistry25App.swift
+// The_Cake_Artistry25
 //
-//  The_Cake_Artistry25App.swift
-//  The_Cake_Artistry25
+// Created by Yatin Parulkar on 2025-06-13.
 //
-//  Created by Yatin Parulkar on 2025-06-13.
-//
-
 import SwiftUI
 import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // This is the crucial line for setting up Firebase.
+        FirebaseApp.configure()
+        return true
+    }
 }
 
 @main
 struct The_Cake_Artistry25App: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    // Register the AppDelegate to configure Firebase.
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-        ContentView()
-      }
+    var body: some Scene {
+        WindowGroup {
+            // The ContentView will handle the authentication state.
+            ContentView()
+        }
     }
-  }
 }
