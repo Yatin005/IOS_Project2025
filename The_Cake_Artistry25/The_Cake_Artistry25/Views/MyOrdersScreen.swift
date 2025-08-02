@@ -7,9 +7,11 @@
 
 import SwiftUI
 import FirebaseFirestore
+
 struct MyOrdersScreen: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var orderVM = OrderViewModel()
+    @StateObject var locationManager = LocationManager()
     @State private var cakeNames: [String: String] = [:] // Dictionary to store cake IDs and names
     
     // Date formatter for displaying the timestamp
@@ -20,9 +22,52 @@ struct MyOrdersScreen: View {
         return formatter
     }
     
+    // A private helper method to create the view for a single order.
+    private func orderRowContent(for order: Order) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Order ID: \(order.id ?? "N/A")")
+                .font(.headline)
+            
+            Text("Cake: \(cakeNames[order.cakeID] ?? "Fetching...")")
+                .font(.subheadline)
+            
+            Text("Price: $\(order.totalPrice, specifier: "%.2f")")
+                .font(.subheadline)
+            
+            Text("Flavour: \(order.flavor)")
+                .font(.subheadline)
+            
+            Text("Quantity: \(order.quantity)")
+                .font(.subheadline)
+            
+            Text("Ordered On: \(order.timestamp, formatter: dateFormatter)")
+                .font(.subheadline)
+            
+            if let customization = order.customization {
+                Text("Customization: \(customization)")
+                    .font(.subheadline)
+            }
+            
+            if let address = order.address {
+                Text("Address: \(address)")
+                    .font(.subheadline)
+            }
+        }
+        .onAppear {
+            fetchCakeName(for: order.cakeID)
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             List {
+                // Display the geofencing status message instead of a current address.
+                if let statusMessage = locationManager.regionStatusMessage {
+                    Section(header: Text("Geofencing Status")) {
+                        Text(statusMessage)
+                    }
+                }
+                
                 if orderVM.orders.isEmpty {
                     VStack(alignment: .center) {
                         Text("You haven't placed any orders yet.")
@@ -32,36 +77,9 @@ struct MyOrdersScreen: View {
                     }
                     .frame(maxWidth: .infinity)
                 } else {
-                    ForEach(orderVM.orders) { order in
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text("Order ID: \(order.id ?? "N/A")")
-                                .font(.headline)
-                            
-                            // Display the cake name if available, otherwise show the ID
-                            Text("Cake: \(cakeNames[order.cakeID] ?? "Fetching...")")
-                                .font(.subheadline)
-                                .onAppear {
-                                    // Fetch the cake name when the view appears
-                                    fetchCakeName(for: order.cakeID)
-                                }
-                            Text("Price: $\(order.totalPrice, specifier: "%.2f")")
-                                .font(.subheadline)
-                            
-                            Text("Flavour: \(order.flavor)")
-                                .font(.subheadline)
-                            
-                            Text("Quantity: \(order.quantity)")
-                                .font(.subheadline)
-                                
-                            // Display the new timestamp property
-                            Text("Ordered On: \(order.timestamp, formatter: dateFormatter)")
-                                .font(.subheadline)
-                            
-                            // Display the optional customization property if it exists
-                            if let customization = order.customization {
-                                Text("Customization: \(customization)")
-                                    .font(.subheadline)
-                            }
+                    Section(header: Text("Order History")) {
+                        ForEach(orderVM.orders) { order in
+                            orderRowContent(for: order)
                         }
                     }
                 }
@@ -78,6 +96,7 @@ struct MyOrdersScreen: View {
     // Fetches the cake name from Firestore based on the cakeID
     private func fetchCakeName(for cakeID: String) {
         let db = Firestore.firestore()
+        // Removed `[weak self]` as `MyOrdersScreen` is a struct (value type)
         db.collection("cakes").document(cakeID).getDocument { (document, error) in
             guard let document = document, document.exists else {
                 print("Document does not exist or an error occurred: \(error?.localizedDescription ?? "Unknown error")")
@@ -90,5 +109,14 @@ struct MyOrdersScreen: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Preview Provider (for easy testing in Xcode)
+#Preview {
+    let mockAuthVM = AuthViewModel()
+    return NavigationView {
+        MyOrdersScreen()
+            .environmentObject(mockAuthVM)
     }
 }

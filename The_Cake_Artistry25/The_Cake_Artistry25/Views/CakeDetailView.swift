@@ -5,9 +5,9 @@
 //  Created by Yatin Parulkar on 2025-06-13.
 //
 import SwiftUI
-
+// Parent view that creates and injects dependencies
 struct CakeDetailView: View {
-    @EnvironmentObject var checkoutViewModel: CheckoutViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     var cake: Cake
     
     @State private var quantity: Int = 1
@@ -21,7 +21,6 @@ struct CakeDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                // Cake Image
                 AsyncImage(url: URL(string: cake.imageUrl)) { image in
                     image.resizable()
                 } placeholder: {
@@ -31,7 +30,6 @@ struct CakeDetailView: View {
                 .frame(maxWidth: .infinity, maxHeight: 300)
                 .cornerRadius(20)
                 
-                // Cake Details
                 VStack(alignment: .leading, spacing: 10) {
                     Text(cake.name)
                         .font(.largeTitle)
@@ -46,7 +44,6 @@ struct CakeDetailView: View {
                 
                 Divider()
                 
-                // Flavor Picker
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Select a Flavor")
                         .font(.headline)
@@ -61,7 +58,6 @@ struct CakeDetailView: View {
                     .cornerRadius(10)
                 }
                 
-                // Quantity Selector
                 HStack {
                     Text("Quantity")
                     Spacer()
@@ -71,7 +67,6 @@ struct CakeDetailView: View {
                 }
                 .font(.headline)
                 
-                // Date and Time Pickers
                 VStack(spacing: 10) {
                     HStack {
                         Text("Order Date")
@@ -88,7 +83,6 @@ struct CakeDetailView: View {
                 }
                 .font(.headline)
                 
-                // Customization Text Field
                 VStack(alignment: .leading) {
                     Text("Customization Notes")
                         .font(.headline)
@@ -99,22 +93,23 @@ struct CakeDetailView: View {
                 
                 Divider()
                 
-                // "Order Now" button
-                Button("Order Now") {
-                    checkoutViewModel.checkout(
-                        cake: cake,
-                        quantity: quantity,
-                        flavor: selectedFlavor,
-                        orderDate: selectedDate,
-                        orderTime: selectedTime,
-                        customization: customization
-                    )
+                NavigationLink(destination: CheckoutScreen(
+                    cake: cake,
+                    customizationText: customization,
+                    quantity: quantity,
+                    flavor: selectedFlavor,
+                    orderDate: selectedDate,
+                    orderTime: selectedTime
+                )
+                .environmentObject(CheckoutViewModel(orderViewModel: OrderViewModel(), authViewModel: authViewModel))
+                ) {
+                    Text("Order Now")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(15)
                 
                 Spacer()
             }
@@ -122,12 +117,5 @@ struct CakeDetailView: View {
         }
         .navigationTitle(cake.name)
         .navigationBarTitleDisplayMode(.inline)
-        .alert(isPresented: $checkoutViewModel.orderSuccess) {
-            Alert(
-                title: Text("Order Placed!"),
-                message: Text("Your order has been placed successfully."),
-                dismissButton: .default(Text("OK"))
-            )
-        }
     }
 }

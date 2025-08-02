@@ -37,7 +37,8 @@ class CheckoutViewModel: ObservableObject {
         flavor: String,
         orderDate: Date,
         orderTime: Date,
-        customization: String
+        customization: String,
+        address: String?
     ) {
         self.orderSuccess = false
         self.checkoutError = nil
@@ -61,7 +62,10 @@ class CheckoutViewModel: ObservableObject {
             timestamp: Date(),
             customization: customization,
             flavor: flavor,
-            totalPrice: totalPrice
+            totalPrice: totalPrice,
+            address: address, // Moved to the correct position
+            orderDate: orderDate,
+            
         )
 
         self.orderViewModel.placeOrder(order: newOrder)

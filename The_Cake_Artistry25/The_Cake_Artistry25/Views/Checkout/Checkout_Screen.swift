@@ -1,24 +1,33 @@
 //
-//  Checkout_Screen.swift
+//  CheckoutScreen.swift
 //  The_Cake_Artistry25
 //
-//  Created by Yatin Parulkar on 2025-06-13.
+//  Created by Gemini on 2025-08-01.
 //
 
 import SwiftUI
+import CoreLocation
 
-struct Checkout_Screen: View {
+// The CheckoutScreen View
+struct CheckoutScreen: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var authViewModel: AuthViewModel
-    @StateObject var orderVM = OrderViewModel()
+    @EnvironmentObject var checkoutVM: CheckoutViewModel
+    
+    // The correct LocationManager with search capabilities
+    @StateObject private var locationManager = LocationManager()
     
     var cake: Cake
     var customizationText: String
     var quantity: Int
-    var flavor: String = "Chocolate"
+    var flavor: String
+    var orderDate: Date
+    var orderTime: Date
     
+    // State for location search and manual selection
+    @State private var searchQuery: String = ""
+    @State private var selectedAddress: String?
     @State private var showingOrderConfirmation = false
-    @State private var placedOrder: Order?
     
     var totalPrice: Double {
         cake.price * Double(quantity)
@@ -67,6 +76,51 @@ struct Checkout_Screen: View {
                             .font(.body)
                             .foregroundColor(.secondary)
                     }
+                    
+                    Divider()
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Delivery Address")
+                            .font(.headline)
+                        
+                        if let finalAddress = selectedAddress {
+                            Text(finalAddress)
+                                .font(.body)
+                                .foregroundColor(.secondary)
+                                .padding()
+                                .background(Color(.systemGray5))
+                                .cornerRadius(10)
+                        }
+                        
+                        TextField("Search for your address in Canada...", text: $searchQuery)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.top, 5)
+                            .onChange(of: searchQuery) { newValue in
+                                locationManager.search(query: newValue)
+                            }
+                        
+                        if !locationManager.searchResults.isEmpty {
+                            List(locationManager.searchResults, id: \.self) { placemark in
+                                Button(action: {
+                                    self.selectedAddress = locationManager.formatAddress(placemark)
+                                    // Clear search results after selection
+                                    locationManager.searchResults = []
+                                    self.searchQuery = "" // Clear the search bar
+                                }) {
+                                    VStack(alignment: .leading) {
+                                        Text(placemark.name ?? "Unknown Place")
+                                            .font(.headline)
+                                        Text(locationManager.formatAddress(placemark))
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                            }
+                            .frame(height: 200)
+                            .cornerRadius(10)
+                            .listStyle(.plain)
+                        }
+                    }
                 }
                 .padding()
                 .background(Color(.systemGray6))
@@ -91,32 +145,28 @@ struct Checkout_Screen: View {
                 
                 Spacer()
                 
-                if orderVM.isPlacingOrder {
+                if checkoutVM.isProcessingOrder {
                     ProgressView("Placing Order...")
                         .progressViewStyle(CircularProgressViewStyle(tint: .orange))
                         .scaleEffect(1.2)
                         .padding()
                 } else {
                     Button(action: {
-                        guard let userID = authViewModel.user?.id,
-                              let cakeID = cake.id else {
-                            return
-                        }
+                        guard authViewModel.user != nil else { return }
                         
-                        let newOrder = Order(
-                            cakeID: cakeID,
-                            userID: userID,
+                        let addressToUse = selectedAddress
+                        
+                        checkoutVM.checkout(
+                            cake: cake,
                             quantity: quantity,
-                            timestamp: Date(),
+                            flavor: flavor,
+                            orderDate: orderDate,
+                            orderTime: orderTime,
                             customization: customizationText,
-                            flavor: self.flavor,
-                            totalPrice: self.totalPrice
+                            address: addressToUse
                         )
-                        
-                        orderVM.placeOrder(order: newOrder)
-                        self.placedOrder = newOrder
                     }) {
-                        Text("Place Order")
+                        Text("Order Now")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -130,8 +180,8 @@ struct Checkout_Screen: View {
             .padding()
             .navigationTitle("Checkout")
         }
-        .onChange(of: orderVM.isPlacingOrder) { oldValue, newValue in
-            if oldValue == true && newValue == false {
+        .onChange(of: checkoutVM.orderSuccess) { success in
+            if success {
                 self.showingOrderConfirmation = true
             }
         }
@@ -147,28 +197,5 @@ struct Checkout_Screen: View {
         .onAppear {
             print("CheckoutScreen appeared with cake: \(cake.name)")
         }
-    }
-}
-
-
-// MARK: - Preview Provider (for easy testing in Xcode)
-#Preview {
-    let mockCake = Cake(
-        id: "mock_id",
-        name: "Chocolate Fudge Cake", description: "Good",
-        imageUrl: "https://placehold.co/100x100/A08880/ffffff?text=Cake",
-        price: 35.50,
-        category: "Classic"
-    )
-    
-    let mockAuthVM = AuthViewModel()
-    
-    NavigationView {
-        Checkout_Screen(
-            cake: mockCake,
-            customizationText: "Happy Birthday John!",
-            quantity: 2
-        )
-        .environmentObject(mockAuthVM)
     }
 }
