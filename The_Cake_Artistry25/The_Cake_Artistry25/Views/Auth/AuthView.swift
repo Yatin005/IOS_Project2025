@@ -2,7 +2,7 @@
 //  AuthView.swift
 //  The_Cake_Artistry25
 //
-//  Created by Deep Kaleka on 2025-08-01.
+//  Created by yatin on 2025-08-01.
 //
 
 import SwiftUI

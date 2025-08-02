@@ -18,6 +18,7 @@
 		5C2397EE2E3D213700A91A15 /* OrderTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2397ED2E3D213700A91A15 /* OrderTrackingView.swift */; };
 		5C2397F02E3D21CE00A91A15 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2397EF2E3D21CE00A91A15 /* CheckoutViewModel.swift */; };
 		5C2397F22E3D4EC800A91A15 /* MyOrdersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2397F12E3D4EC800A91A15 /* MyOrdersScreen.swift */; };
+		5C2397F92E3D85C900A91A15 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5C2397F82E3D85C900A91A15 /* SDWebImageSwiftUI */; };
 		5CA73A832E397D220008170D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA73A822E397D220008170D /* Album.swift */; };
 		5CA73A852E397FDF0008170D /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA73A842E397FDF0008170D /* AlbumViewModel.swift */; };
 		D309C1252E035C2B0087DF7B /* Cake.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309C1242E035C2B0087DF7B /* Cake.swift */; };
@@ -36,7 +37,6 @@
 		D88807172DFCAF99004747BF /* Welcome_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807162DFCAF99004747BF /* Welcome_Screen.swift */; };
 		D88807192DFCAFB6004747BF /* Home_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807182DFCAFB6004747BF /* Home_Screen.swift */; };
 		D888071B2DFCAFD6004747BF /* Gallery_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */; };
-		D888071D2DFCAFE6004747BF /* CakeDetail_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */; };
 		D888071F2DFCAFFB004747BF /* Customization_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888071E2DFCAFFB004747BF /* Customization_Screen.swift */; };
 		D88807212DFCB013004747BF /* Checkout_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807202DFCB013004747BF /* Checkout_Screen.swift */; };
 		D88807232DFCB02B004747BF /* OrderTracking_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88807222DFCB02B004747BF /* OrderTracking_Screen.swift */; };
@@ -99,7 +99,6 @@
 		D88807162DFCAF99004747BF /* Welcome_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome_Screen.swift; sourceTree = "<group>"; };
 		D88807182DFCAFB6004747BF /* Home_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_Screen.swift; sourceTree = "<group>"; };
 		D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery_Screen.swift; sourceTree = "<group>"; };
-		D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeDetail_Screen.swift; sourceTree = "<group>"; };
 		D888071E2DFCAFFB004747BF /* Customization_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customization_Screen.swift; sourceTree = "<group>"; };
 		D88807202DFCB013004747BF /* Checkout_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkout_Screen.swift; sourceTree = "<group>"; };
 		D88807222DFCB02B004747BF /* OrderTracking_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTracking_Screen.swift; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C2397F92E3D85C900A91A15 /* SDWebImageSwiftUI in Frameworks */,
 				D8A036052E342461006B3FD5 /* FirebaseAnalytics in Frameworks */,
 				D8A036092E342461006B3FD5 /* FirebaseCore in Frameworks */,
 				D8A0360B2E342461006B3FD5 /* FirebaseDatabase in Frameworks */,
@@ -201,7 +201,6 @@
 		D309C1302E035CD40087DF7B /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
-				D888071C2DFCAFE6004747BF /* CakeDetail_Screen.swift */,
 				D888071A2DFCAFD6004747BF /* Gallery_Screen.swift */,
 			);
 			path = Gallery;
@@ -331,6 +330,7 @@
 				D8A0360A2E342461006B3FD5 /* FirebaseDatabase */,
 				D8A0360C2E342461006B3FD5 /* FirebaseFirestore */,
 				D8A0360E2E342461006B3FD5 /* FirebaseStorage */,
+				5C2397F82E3D85C900A91A15 /* SDWebImageSwiftUI */,
 			);
 			productName = The_Cake_Artistry25;
 			productReference = D88806E72DFCAE3E004747BF /* The_Cake_Artistry25.app */;
@@ -406,6 +406,7 @@
 			mainGroup = D88806DE2DFCAE3D004747BF;
 			packageReferences = (
 				D8A036032E342461006B3FD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5C2397F72E3D85C900A91A15 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = D88806E82DFCAE3E004747BF /* Products */;
 			projectDirPath = "";
@@ -450,7 +451,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D888071D2DFCAFE6004747BF /* CakeDetail_Screen.swift in Sources */,
 				5C2397EC2E3D212100A91A15 /* ProfileView.swift in Sources */,
 				D309C1252E035C2B0087DF7B /* Cake.swift in Sources */,
 				5CA73A832E397D220008170D /* Album.swift in Sources */,
@@ -643,6 +643,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"The_Cake_Artistry25/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -671,6 +673,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"The_Cake_Artistry25/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -803,6 +807,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5C2397F72E3D85C900A91A15 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
 		D8A036032E342461006B3FD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -814,6 +826,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5C2397F82E3D85C900A91A15 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C2397F72E3D85C900A91A15 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		D8A036042E342461006B3FD5 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D8A036032E342461006B3FD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

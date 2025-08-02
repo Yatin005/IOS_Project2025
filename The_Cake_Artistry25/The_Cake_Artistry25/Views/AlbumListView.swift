@@ -5,6 +5,7 @@
 //  Created by Deep Kaleka on 2025-08-01.
 //
 import SwiftUI
+import SDWebImageSwiftUI // Add this line to import the new package
 
 struct AlbumListView: View {
     @StateObject var viewModel = AlbumViewModel()
@@ -43,17 +44,13 @@ struct AlbumCardView: View {
     
     var body: some View {
         VStack {
-            // Display the album image from its URL
-            AsyncImage(url: URL(string: album.imageUrl)) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fill) // Fills the frame, cropping if needed
-            } placeholder: {
-                ProgressView()
-                    .frame(width: 150, height: 150) // Placeholder also has a fixed size
-            }
-            .frame(height: 150)
-            .clipped()
-            .cornerRadius(15)
+            // Replace AsyncImage with WebImage
+            WebImage(url: URL(string: album.imageUrl))
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 150)
+                .clipped()
+                .cornerRadius(15)
             
             // Display the album title below the image
             Text(album.title)

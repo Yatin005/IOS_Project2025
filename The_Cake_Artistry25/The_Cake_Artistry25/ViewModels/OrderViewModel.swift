@@ -28,11 +28,13 @@ class OrderViewModel: ObservableObject {
                 guard let self = self else { return }
                 guard let documents = querySnapshot?.documents else {
                     print("No documents found or an error occurred: \(error?.localizedDescription ?? "Unknown error")")
+                    self.orderError = error
                     return
                 }
                 
                 // Map the documents to your Order model using Codable support
                 self.orders = documents.compactMap { try? $0.data(as: Order.self) }
+                print("Fetched \(self.orders.count) orders.")
             }
     }
     
@@ -47,6 +49,8 @@ class OrderViewModel: ObservableObject {
                 if let error = error {
                     self.orderError = error
                     print("Error placing order: \(error.localizedDescription)")
+                } else {
+                    print("Order placed successfully.")
                 }
             }
         } catch {
