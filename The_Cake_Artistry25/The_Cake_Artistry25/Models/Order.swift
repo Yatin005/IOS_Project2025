@@ -1,16 +1,20 @@
-//
-//  Order.swift
-//  The_Cake_Artistry25
-//
-//  Created by Het Shah on 2025-06-18.
-//
-
+// Order.swift
 import Foundation
-struct Order: Identifiable {
-    let id: String
-    let cake: Cake
+import FirebaseFirestore
+// Order.swift
+import Foundation
+import FirebaseFirestore
+
+struct Order: Identifiable, Codable {
+    @DocumentID var id: String? // Optional ID, let the backend (e.g., Firestore) generate it
+    let cakeID: String
+    let userID: String
     let quantity: Int
-    let customerId: String
-    let deliveryDate: Date
-    let status: String
+    let timestamp: Date
+    let customization: String?
+    let flavor: String
+    let totalPrice: Double
+    let address: String?
+    let orderDate: Date
+    
 }

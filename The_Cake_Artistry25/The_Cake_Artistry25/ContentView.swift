@@ -1,35 +1,36 @@
 //
+//  AppContentView.swift
+//  The_Cake_Artistry25
+//
+//  Created by Yatin Parulkar on 2025-06-13.
+//
+//
 //  ContentView.swift
 //  The_Cake_Artistry25
 //
-//  Created by Yatin Parulkar on 2025-06-13.
+//  Created by Het Shah on 2025-06-18.
 //
-
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = AuthViewModel()
-
+    // The AuthViewModel is created and owned by ContentView.
+    // It will be the single source of truth for authentication state.
+    @StateObject private var authViewModel = AuthViewModel()
+    
     var body: some View {
-        if viewModel.isLoggedIn {
-            VStack(spacing: 20) {
-                Text("Welcome, \(viewModel.email)!")
-                    .font(.title)
-                Button("Logout") {
-                    viewModel.logout()
-                }
-                .padding()
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(10)
+        Group {
+            // Check if there is a logged-in user.
+            if authViewModel.user != nil {
+                // If a user is logged in, show the main application tab view.
+                // We inject the authViewModel into the environment so child views can access it.
+                MainTabView()
+                    .environmentObject(authViewModel)
+            } else {
+                // If no user is logged in, show the welcome and authentication flow.
+                // The WelcomeView will lead to the AuthView.
+                WelcomeView()
+                    .environmentObject(authViewModel)
             }
-        } else {
-            Login_Screen(viewModel: viewModel)
         }
     }
 }
-
-#Preview {
-    ContentView()
-}
-
