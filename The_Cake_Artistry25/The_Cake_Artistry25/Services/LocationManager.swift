@@ -2,161 +2,150 @@
 //  LocationManager.swift
 //  The_Cake_Artistry25
 //
-//  Created by Gemini on 2025-08-01.
+//  Created by Het Shah on 2025-08-01.
 //
 
 import Foundation
 import CoreLocation
+import MapKit
 import Combine
 
-// The LocationManager is an ObservableObject to allow SwiftUI views to react to changes.
-// It also conforms to CLLocationManagerDelegate to receive location events.
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    
-    // Core Location manager instance for requesting location authorization and updates.
+
     private let locationManager = CLLocationManager()
-    
-    // Geocoder to convert coordinates to an address, and vice versa.
     private let geocoder = CLGeocoder()
-    
-    // Published properties for real-time updates to views.
-    // This property will store the results of an address search.
+
     @Published var searchResults: [CLPlacemark] = []
-    
-    // This property will track the current geofencing status.
+    @Published var isSearching = false
     @Published var regionStatusMessage: String?
-    
-    // This property will track the current authorization status.
     @Published var authorizationStatus: CLAuthorizationStatus?
-    
-    // A property to hold the region we are currently monitoring.
+
     private var monitoredRegion: CLCircularRegion?
-    
+
     override init() {
         super.init()
-        // Set this class as the delegate for the location manager.
         locationManager.delegate = self
-        // Request "always" authorization from the user for geofencing.
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
     }
-    
-    // MARK: - Location Authorization and Monitoring
-    
-    // This method is called when the location authorization status changes.
+
+    // MARK: - Authorization
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.authorizationStatus = status
-        
+        authorizationStatus = status
         if status == .denied || status == .restricted {
-            self.regionStatusMessage = "Location access denied. Please enable in Settings for geofencing."
+            regionStatusMessage = "Location access denied. Enable it in Settings."
         }
     }
-    
-    // This method is called when the user enters a monitored region.
+
+    // MARK: - Region monitoring callbacks
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            print("You have entered the monitored region!")
-            // You could trigger a local notification or other action here.
-            DispatchQueue.main.async {
-                self.regionStatusMessage = "You have arrived at your destination!"
-            }
-        }
+        guard region is CLCircularRegion else { return }
+        DispatchQueue.main.async { self.regionStatusMessage = "You have arrived at your destination!" }
     }
-    
-    // This method is called when the user exits a monitored region.
+
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            print("You have exited the monitored region!")
-            DispatchQueue.main.async {
-                self.regionStatusMessage = "You have left the destination."
-            }
-        }
+        guard region is CLCircularRegion else { return }
+        DispatchQueue.main.async { self.regionStatusMessage = "You have left the destination." }
     }
-    
-    // This method is called if region monitoring fails.
+
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print("Region monitoring failed: \(error.localizedDescription)")
-        DispatchQueue.main.async {
-            self.regionStatusMessage = "Geofencing failed: \(error.localizedDescription)"
-        }
+        DispatchQueue.main.async { self.regionStatusMessage = "Geofencing failed: \(error.localizedDescription)" }
     }
-    
-    // MARK: - Address Searching and Geofencing
-    
-    // Function to search for an address based on a query string.
+
+    // MARK: - Search (POI-first with fallback to address geocoding)
     func search(query: String) {
-        self.searchResults = []
-        guard !query.isEmpty else { return }
-        
-        let canadaRegion = CLCircularRegion(center: CLLocationCoordinate2D(latitude: 56.1304, longitude: -106.3468), radius: 5000000, identifier: "canadaRegion")
-        
-        geocoder.geocodeAddressString(query, in: canadaRegion) { [weak self] (placemarks, error) in
+        let q = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        searchResults = []
+        guard !q.isEmpty else { return }
+
+        isSearching = true
+        geocoder.cancelGeocode()
+
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = q
+        if let loc = locationManager.location {
+           
+            request.region = MKCoordinateRegion(
+                center: loc.coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8)
+            )
+        }
+
+        MKLocalSearch(request: request).start { [weak self] response, error in
             guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("Geocoding error: \(error.localizedDescription)")
-                    self.searchResults = []
-                    return
+            if let items = response?.mapItems, !items.isEmpty {
+                DispatchQueue.main.async {
+                    self.searchResults = items.map { $0.placemark } // MKPlacemark is a
+                    self.isSearching = false
                 }
-                
-                guard let placemarks = placemarks else {
-                    self.searchResults = []
-                    return
+                return
+            }
+
+            self.geocoder.geocodeAddressString(q) { placemarks, geoError in
+                DispatchQueue.main.async {
+                    self.isSearching = false
+                    if let geoError = geoError {
+                        print("Geocoding error: \(geoError.localizedDescription)")
+                        self.searchResults = []
+                    } else {
+                        self.searchResults = placemarks ?? []
+                    }
                 }
-                
-                // Filter the results to only include those in Canada
-                self.searchResults = placemarks.filter { $0.country == "Canada" }
             }
         }
     }
-    
-    // Function to start monitoring a geofence for a specific location.
+
+    // MARK: - Geofencing
     func startMonitoring(for placemark: CLPlacemark) {
-        // Stop any existing monitoring before starting a new one.
         stopMonitoring()
-        
+
         guard let location = placemark.location else {
-            self.regionStatusMessage = "Cannot get location from placemark."
+            regionStatusMessage = "Cannot get location from placemark."
             return
         }
-        
+
+        // Geofencing background monitoring needs "Always"
+        if locationManager.authorizationStatus != .authorizedAlways {
+            regionStatusMessage = "Requesting 'Always' permission for background geofencing."
+            locationManager.requestAlwaysAuthorization()
+        }
+
+        guard CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) else {
+            regionStatusMessage = "Geofencing not available on this device."
+            return
+        }
+
         let region = CLCircularRegion(center: location.coordinate, radius: 100, identifier: "destinationRegion")
-        // Notify when the user enters and exits the region.
         region.notifyOnEntry = true
         region.notifyOnExit = true
-        
-        self.monitoredRegion = region
+
+        monitoredRegion = region
         locationManager.startMonitoring(for: region)
-        
+
         DispatchQueue.main.async {
-            self.regionStatusMessage = "Now monitoring region for: \(self.formatAddress(placemark))"
+            self.regionStatusMessage = "Monitoring: \(self.formatAddress(placemark))"
             print("Started monitoring region: \(region.identifier)")
         }
     }
-    
-    // Function to stop monitoring the current geofence.
+
     func stopMonitoring() {
-        if let region = self.monitoredRegion {
+        if let region = monitoredRegion {
             locationManager.stopMonitoring(for: region)
-            self.monitoredRegion = nil
+            monitoredRegion = nil
             print("Stopped monitoring region: \(region.identifier)")
-            DispatchQueue.main.async {
-                self.regionStatusMessage = "Monitoring stopped."
-            }
+            DispatchQueue.main.async { self.regionStatusMessage = "Monitoring stopped." }
         }
     }
-    
-    // MARK: - Helper Methods
-    
-    // Helper function to format the address from a CLPlacemark object into a single string.
+
+    // MARK: - Helpers
     func formatAddress(_ placemark: CLPlacemark) -> String {
-        var addressComponents: [String] = []
-        if let street = placemark.thoroughfare { addressComponents.append(street) }
-        if let city = placemark.locality { addressComponents.append(city) }
-        if let state = placemark.administrativeArea { addressComponents.append(state) }
-        if let postalCode = placemark.postalCode { addressComponents.append(postalCode) }
-        if let country = placemark.country { addressComponents.append(country) }
-        
-        return addressComponents.joined(separator: ", ")
+        var parts: [String] = []
+        if let name = placemark.name { parts.append(name) }
+        if let street = placemark.thoroughfare { parts.append(street) }
+        if let city = placemark.locality { parts.append(city) }
+        if let state = placemark.administrativeArea { parts.append(state) }
+        if let postalCode = placemark.postalCode { parts.append(postalCode) }
+        if let country = placemark.country { parts.append(country) }
+        return parts.joined(separator: ", ")
     }
 }

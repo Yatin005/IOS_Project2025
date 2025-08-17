@@ -11,7 +11,7 @@ struct WelcomeView: View {
         NavigationView {
             VStack {
                 Spacer()
-                Image("app-logo") // Make sure to add this asset
+                Image("app-logo") 
                     .resizable()
                     .scaledToFit()
                     .frame(width: 150, height: 150)

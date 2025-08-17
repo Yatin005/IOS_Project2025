@@ -2,7 +2,7 @@
 //  CheckoutViewModel.swift
 //  The_Cake_Artistry25
 //
-//  Updated by Gemini on 2025-08-01.
+//  Updated by Het Shah on 2025-08-01.
 //
 
 import Foundation

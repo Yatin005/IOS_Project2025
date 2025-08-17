@@ -5,7 +5,15 @@
 //  Created by Yatin Parulkar on 2025-06-13.
 //
 import SwiftUI
-// Parent view that creates and injects dependencies
+
+private enum AppTheme {
+    static let accent = Color.pink
+    static let gradient = LinearGradient(
+        colors: [.pink.opacity(0.9), .purple.opacity(0.9), .blue.opacity(0.9)],
+        startPoint: .topLeading, endPoint: .bottomTrailing
+    )
+}
+
 struct CakeDetailView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     var cake: Cake
@@ -104,12 +112,15 @@ struct CakeDetailView: View {
                 .environmentObject(CheckoutViewModel(orderViewModel: OrderViewModel(), authViewModel: authViewModel))
                 ) {
                     Text("Order Now")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(15)
-                }
+                           .font(.headline)
+                           .frame(maxWidth: .infinity)
+                           .padding()
+                           .background(AppTheme.accent)
+                           .foregroundColor(.white)
+                           .cornerRadius(15)
+                           .shadow(color: AppTheme.accent.opacity(0.3), radius: 10, y: 5)
+                   }
+                
                 
                 Spacer()
             }

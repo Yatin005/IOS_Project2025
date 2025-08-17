@@ -15,15 +15,15 @@ struct OrderTrackingScreen: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("Order #\(order.id ?? "N/A")") // Safely unwrap order.id
+            Text("Order #\(order.id ?? "N/A")")
                 .font(.largeTitle)
             
             if let cake = cake {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(cake.name).font(.headline)
                     Text("Quantity: \(order.quantity)")
-                    Text("Customization: \(order.customization!.isEmpty ? "None" : order.customization)")
-                    // Use orderDate and orderTime instead of timestamp
+                    Text("Customization: \(String(describing: order.customization!.isEmpty ? "None" : order.customization))")
+                
                     
                 }
             } else {

@@ -2,7 +2,7 @@
 //  AlbumListView.swift
 //  The_Cake_Artistry25
 //
-//  Created by Deep Kaleka on 2025-08-01.
+//  Created by Het Shah on 2025-08-01.
 //
 import SwiftUI
 import SDWebImageSwiftUI // Add this line to import the new package
@@ -10,7 +10,6 @@ import SDWebImageSwiftUI // Add this line to import the new package
 struct AlbumListView: View {
     @StateObject var viewModel = AlbumViewModel()
     
-    // The columns for your grid.
     private var columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -19,10 +18,9 @@ struct AlbumListView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                // Display the grid of albums
+                
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(viewModel.albums) { album in
-                        // Wrap the AlbumCardView in a NavigationLink
                         NavigationLink(destination: CakeListView(album: album)) {
                             AlbumCardView(album: album)
                         }
@@ -44,7 +42,7 @@ struct AlbumCardView: View {
     
     var body: some View {
         VStack {
-            // Replace AsyncImage with WebImage
+            
             WebImage(url: URL(string: album.imageUrl))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -52,7 +50,6 @@ struct AlbumCardView: View {
                 .clipped()
                 .cornerRadius(15)
             
-            // Display the album title below the image
             Text(album.title)
                 .font(.headline)
                 .padding(.top, 5)

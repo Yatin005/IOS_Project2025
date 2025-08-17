@@ -2,16 +2,14 @@
 //  CakeListView.swift
 //  The_Cake_Artistry25
 //
-//  Created by Deep Kaleka on 2025-08-01.
+//  Created by Het Shah on 2025-08-01.
 //
 import SwiftUI
 
-// This is the main view that displays a grid of cake cards.
 struct CakeListView: View {
     var album: Album
     @StateObject var viewModel = CakeViewModel()
 
-    // Define the grid layout for two flexible columns.
     var columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -19,7 +17,7 @@ struct CakeListView: View {
 
     var body: some View {
         ScrollView {
-            // Display a loading indicator, error message, or the cake grid.
+           
             if viewModel.isLoading {
                 ProgressView("Loading Cakes...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -42,7 +40,7 @@ struct CakeListView: View {
         }
         .navigationTitle(album.title)
         .onAppear {
-            // Fetch cakes for the album when the view appears.
+            
             if let albumID = album.id {
                 viewModel.fetchCakes(for: albumID)
             }
@@ -50,23 +48,17 @@ struct CakeListView: View {
     }
 }
 
-// A custom view for each cake item in the grid, with a consistent layout.
 struct CakeCardView: View {
     var cake: Cake
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Image container with a fixed aspect ratio and fill mode.
             ZStack {
-                // A solid color placeholder to prevent visual jumping while loading.
                 Color(.systemGray5)
-
-                // The AsyncImage loads the cake image from the URL.
                 AsyncImage(url: URL(string: cake.imageUrl)) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
                 } placeholder: {
-                    // Show a progress view inside a consistent frame.
                     ProgressView()
                 }
             }
@@ -74,12 +66,11 @@ struct CakeCardView: View {
             .clipped()
             .cornerRadius(15)
 
-            // Cake name and price are aligned to the leading edge.
             Text(cake.name)
                 .font(.headline)
                 .foregroundColor(.black)
-                .lineLimit(2) // Prevents long names from breaking the layout
-                .minimumScaleFactor(0.8) // Shrinks text if needed
+                .lineLimit(2)
+                .minimumScaleFactor(0.8)
 
             Text("$\(cake.price, specifier: "%.2f")")
                 .font(.subheadline)
